@@ -51,6 +51,8 @@ pytest -q
 
 Open `http://127.0.0.1:8000`. Use a public dataset such as EmoDB, RAVDESS, or CREMA-D. Populate `data/manifest.csv` with `path,label,speaker`; `speaker` is mandatory to ensure that a person's voice never appears in both training and testing. Do not commit the dataset or large weights: provide them through a licensed link and reproducible instructions.
 
+For inference, the page accepts WebM, WAV, MP3, FLAC, OGG, and MP4 files with an audio track. The application analyzes the first four seconds of each file; short clips are zero-padded.
+
 ## Development plan and delivery criteria
 
 1. **Data:** choose one public corpus (recommended: RAVDESS, because it provides actor IDs), normalize its emotion labels, and generate `manifest.csv`.

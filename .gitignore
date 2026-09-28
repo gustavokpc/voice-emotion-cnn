@@ -1,0 +1,16 @@
+# Python environments and generated caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Runtime uploads
+uploads/
+
+# Raw EmoDB dataset and source archive
+data/emodb/
+data/emodb.zip
+
+# Legacy duplicate of the selected model; the application uses model-scratch.pt
+# and model-transfer.pt directly.
+artifacts/model.pt

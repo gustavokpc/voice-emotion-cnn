@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Voice Emotion CNN</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><main><p class="eyebrow">ROB311 - CNN</p><h1>Voice emotion recognition</h1><p>Record up to four seconds of speech or upload an audio file.</p>
+<section><label class="model-select">Model <select id="model"><option value="transfer" selected>Transfer learning (ResNet-18)</option><option value="scratch">Scratch CNN</option></select></label><button id="record">Start recording</button><button id="stop" disabled>Stop</button><label class="upload">Upload audio <input id="file" type="file" accept="audio/*"></label></section>
+<p id="status" aria-live="polite">Waiting for audio.</p><section id="result" hidden><h2 id="emotion"></h2><p id="confidence"></p><canvas id="spectrogram" width="640" height="220" aria-label="Log-Mel spectrogram"></canvas><ul id="scores"></ul></section></main><script src="/static/app.js"></script></body></html>

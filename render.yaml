@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: voice-emotion-cnn
+    runtime: docker
+    healthCheckPath: /health
+    plan: free

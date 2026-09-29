@@ -38,6 +38,11 @@ def load_model(architecture: str) -> tuple[torch.nn.Module, list[str]]:
 def available_models() -> list[str]:
     return [architecture for architecture in MODEL_ARCHITECTURES if (ARTIFACTS / f"model-{architecture}.pt").exists()]
 
+
+def model_statistics(architecture: str) -> dict:
+    statistics_path = ARTIFACTS / f"evaluation-{architecture}.json"
+    return json.loads(statistics_path.read_text(encoding="utf-8")) if statistics_path.exists() else {}
+
 @app.get("/")
 def index() -> FileResponse:
     return FileResponse(ROOT / "web" / "index.html")
@@ -48,8 +53,13 @@ def health() -> dict[str, bool]:
 
 
 @app.get("/models")
-def models() -> dict[str, list[str]]:
-    return {"available_models": available_models()}
+def models() -> dict[str, list[dict]]:
+    return {
+        "models": [
+            {"architecture": architecture, "statistics": model_statistics(architecture)}
+            for architecture in available_models()
+        ]
+    }
 
 @app.post("/predict")
 async def predict(audio: UploadFile = File(...), architecture: str = Form("transfer")) -> dict:

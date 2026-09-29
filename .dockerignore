@@ -1,0 +1,10 @@
+.git/
+.venv/
+__pycache__/
+.pytest_cache/
+uploads/
+data/
+tests/
+*.pyc
+Voice_Emotion_Recognition_Class.pdf
+README.md

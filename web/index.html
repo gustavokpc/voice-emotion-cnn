@@ -1,7 +1,13 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Voice Emotion CNN</title><link rel="stylesheet" href="/static/style.css"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Voice Emotion CNN</title><link rel="stylesheet" href="/static/style.css?v=20260929-2"></head>
 <body><main><p class="eyebrow">ROB311 - CNN</p><h1>Voice emotion recognition</h1><p>Record up to four seconds of speech or upload an audio file.</p>
 <section><label class="model-select">Model <select id="model"><option value="transfer" selected>Transfer learning (ResNet-18)</option><option value="scratch">Scratch CNN</option></select></label><button id="record">Start recording</button><button id="stop" disabled>Stop</button><label class="upload">Upload audio <input id="file" type="file" accept="audio/webm,audio/wav,audio/mpeg,audio/flac,audio/ogg,audio/mp4,video/mp4"></label></section>
 <p class="audio-hint">Accepted formats: WebM, WAV, MP3, FLAC, OGG, and MP4 with an audio track. Use a short speech recording (up to 4 seconds); longer files are trimmed to their first 4 seconds.</p>
-<p id="status" aria-live="polite">Waiting for audio.</p><section id="result" hidden><h2 id="emotion"></h2><p id="confidence"></p><canvas id="spectrogram" width="640" height="220" aria-label="Log-Mel spectrogram"></canvas><ul id="scores"></ul></section></main><script src="/static/app.js"></script></body></html>
+<p id="status" aria-live="polite">Waiting for audio.</p><section id="result" hidden><h2 id="emotion"></h2><p id="confidence"></p><canvas id="spectrogram" width="640" height="220" aria-label="Log-Mel spectrogram"></canvas><ul id="scores"></ul></section>
+<section id="model-statistics" class="statistics" aria-live="polite">
+<p class="section-kicker">EVALUATION ON UNSEEN SPEAKERS</p><h2>Model statistics</h2><p id="statistics-description">Loading evaluation results...</p>
+<div id="metric-cards" class="metric-cards"></div>
+<div class="matrix-wrap"><h3>Confusion matrix</h3><table id="confusion-matrix"><caption>Confusion matrix — rows are actual emotions and columns are predictions.</caption></table></div>
+</section>
+</main><script src="/static/app.js"></script><script src="/static/stats.js"></script></body></html>

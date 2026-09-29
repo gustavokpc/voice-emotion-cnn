@@ -50,6 +50,13 @@ pytest -q
 ```
 
 Open `http://127.0.0.1:8000`. Use a public dataset such as EmoDB, RAVDESS, or CREMA-D. Populate `data/manifest.csv` with `path,label,speaker`; `speaker` is mandatory to ensure that a person's voice never appears in both training and testing. Do not commit the dataset or large weights: provide them through a licensed link and reproducible instructions.
+Generate the confusion matrices and per-emotion recall data after training:
+
+```powershell
+python evaluate.py
+```
+
+This writes `artifacts/evaluation-scratch.json` and `artifacts/evaluation-transfer.json`, which are displayed by the web interface.
 
 For inference, the page accepts WebM, WAV, MP3, FLAC, OGG, and MP4 files with an audio track. The application analyzes the first four seconds of each file; short clips are zero-padded.
 
@@ -73,6 +80,15 @@ Both models were evaluated on the same speaker-disjoint holdout split (test spea
 The transfer-learning model achieved the best results and is the default model in the web interface. The interface also lets the user run either trained model for comparison.
 
 ## Responsible-use limitations
+## Public deployment
+
+The repository includes a `Dockerfile` and `render.yaml` for deployment as a Render Web Service. The image installs `ffmpeg`, copies both trained model weights, and starts the FastAPI application on Render's `PORT`.
+
+1. Push the repository, including `artifacts/model-scratch.pt`, `artifacts/model-transfer.pt`, and the evaluation JSON files.
+2. In Render, create a new **Blueprint** and connect the repository. Render reads `render.yaml` and builds the `Dockerfile`.
+3. When deployment finishes, open the generated `https://<service>.onrender.com` URL and confirm `/health` reports `{"trained_model_available": true}`.
+
+The public service must use HTTPS for browser microphone access. The free tier may take time to wake after inactivity.
 
 The inferred emotion is an estimate of acoustic patterns learned from the training dataset, not a psychological diagnosis or a reliable personal attribute. Use only authorized audio and state this limitation explicitly in the presentation.
 

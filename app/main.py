@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 import shutil
 import uuid
 from pathlib import Path
@@ -20,6 +21,7 @@ UPLOADS.mkdir(exist_ok=True)
 app = FastAPI(title="Voice Emotion CNN")
 app.mount("/static", StaticFiles(directory=ROOT / "web"), name="static")
 
+@lru_cache(maxsize=1)
 def load_model(architecture: str) -> tuple[torch.nn.Module, list[str]]:
     if architecture not in MODEL_ARCHITECTURES:
         raise HTTPException(400, "Unknown model architecture. Choose scratch or transfer.")

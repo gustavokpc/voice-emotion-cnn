@@ -16,6 +16,7 @@
 #confusion-matrix td { background:rgba(91,124,250,calc(.12 + .72 * var(--intensity))); }
 @media (max-width:560px) { .metric-cards { grid-template-columns:1fr; } }
 
+#result[hidden] { display:none; }
 :root { color:#eef0ff; background:#11131f; }
 body { padding:32px 20px; box-sizing:border-box; background:radial-gradient(circle at 82% 86%,rgba(16,131,151,.28),transparent 29rem),radial-gradient(circle at 48% 86%,rgba(122,66,220,.34),transparent 28rem),linear-gradient(135deg,#10121e 0%,#151728 52%,#0d2029 100%); }
 main { width:min(960px,100%); }
